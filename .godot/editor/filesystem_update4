@@ -1,2 +1,3 @@
 res://scenes/world.tscn
-res://shaders/water.gdshader
+res://scripts/player.gd
+res://scripts/world.gd
