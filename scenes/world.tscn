@@ -6,7 +6,7 @@
 [ext_resource type="Script" path="res://scripts/player.gd" id="4_8dcdt"]
 [ext_resource type="FontFile" uid="uid://bnpiffg8y85c6" path="res://at01.ttf" id="4_615kh"]
 [ext_resource type="Texture2D" uid="uid://kloo2t2ay5c0" path="res://assets/scafold_small.png" id="4_gb64y"]
-[ext_resource type="Texture2D" uid="uid://c7u78m02m8r2a" path="res://assets/unknown2.png" id="4_isaar"]
+[ext_resource type="Texture2D" uid="uid://dc3yfk5jewxi3" path="res://assets/unknown.png" id="4_ukbsf"]
 [ext_resource type="Texture2D" uid="uid://dh4fiod8o4lb1" path="res://assets/concrete2_smaller.jpg" id="5_3not1"]
 [ext_resource type="AudioStream" uid="uid://jhkwfsvcx2eu" path="res://assets/waves.wav" id="5_hnpt7"]
 [ext_resource type="Texture2D" uid="uid://dadaf4wtvee2i" path="res://assets/rail.png" id="8_jqje3"]
@@ -49,7 +49,7 @@ shader = ExtResource("2_p47a0")
 shader_parameter/offset = 0.0
 shader_parameter/amp = 0.33
 shader_parameter/downscale_factor = 3
-shader_parameter/water = ExtResource("4_isaar")
+shader_parameter/water = ExtResource("4_ukbsf")
 shader_parameter/noise = SubResource("NoiseTexture2D_nlnfs")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_lvqvi"]

@@ -60,5 +60,5 @@ void fragment() {
 	
 	vec4 final = mix(water_tex, vec4(1.0), round(noise_tex.x-0.2));
 	
-	ALBEDO = clamp(final.rgb,0.0,1.0);
+	ALBEDO = clamp(water_tex.rgb,0.0,1.0);
 }
