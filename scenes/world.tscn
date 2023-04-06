@@ -1,0 +1,260 @@
+[gd_scene load_steps=28 format=3 uid="uid://6q6g13360wry"]
+
+[ext_resource type="Script" path="res://scripts/world.gd" id="1_wre1y"]
+[ext_resource type="Shader" path="res://shaders/water.gdshader" id="2_p47a0"]
+[ext_resource type="Texture2D" uid="uid://ii7rqx83y165" path="res://star.jpg" id="3_gwfga"]
+[ext_resource type="Script" path="res://scripts/player.gd" id="4_8dcdt"]
+[ext_resource type="FontFile" uid="uid://bnpiffg8y85c6" path="res://at01.ttf" id="4_615kh"]
+[ext_resource type="Texture2D" uid="uid://kloo2t2ay5c0" path="res://assets/scafold_small.png" id="4_gb64y"]
+[ext_resource type="Texture2D" uid="uid://dh4fiod8o4lb1" path="res://assets/concrete2_smaller.jpg" id="5_3not1"]
+[ext_resource type="AudioStream" uid="uid://jhkwfsvcx2eu" path="res://assets/waves.wav" id="5_hnpt7"]
+[ext_resource type="Texture2D" uid="uid://dadaf4wtvee2i" path="res://assets/rail.png" id="8_jqje3"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_s4wyr"]
+panorama = ExtResource("3_gwfga")
+
+[sub_resource type="Sky" id="Sky_dwxub"]
+sky_material = SubResource("PanoramaSkyMaterial_s4wyr")
+
+[sub_resource type="Environment" id="Environment_yvwur"]
+background_mode = 2
+sky = SubResource("Sky_dwxub")
+ambient_light_source = 2
+ambient_light_color = Color(0.473975, 0.473976, 0.473976, 1)
+ambient_light_energy = 0.5
+ssr_enabled = true
+fog_enabled = true
+fog_light_energy = 1.67
+volumetric_fog_enabled = true
+volumetric_fog_albedo = Color(0.168627, 0.168627, 0.168627, 1)
+volumetric_fog_length = 78.73
+volumetric_fog_ambient_inject = 0.22
+adjustment_enabled = true
+adjustment_brightness = 0.69
+adjustment_contrast = 0.9
+adjustment_saturation = 1.1
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_avfhm"]
+seed = 10
+frequency = 0.016
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_nlnfs"]
+seamless = true
+noise = SubResource("FastNoiseLite_avfhm")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4r3lt"]
+render_priority = 0
+shader = ExtResource("2_p47a0")
+shader_parameter/offset = 0.0
+shader_parameter/amp = 0.33
+shader_parameter/noise = SubResource("NoiseTexture2D_nlnfs")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_lvqvi"]
+material = SubResource("ShaderMaterial_4r3lt")
+size = Vector2(50, 50)
+subdivide_width = 64
+subdivide_depth = 64
+
+[sub_resource type="Animation" id="Animation_5w2b6"]
+resource_name = "spin"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.261799, 0, 0), Vector3(-0.261799, 6.28319, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ervn6"]
+_data = {
+"spin": SubResource("Animation_5w2b6")
+}
+
+[sub_resource type="BoxMesh" id="BoxMesh_auidn"]
+size = Vector3(1, 7, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5a6pd"]
+transparency = 2
+alpha_scissor_threshold = 0.237
+alpha_antialiasing_mode = 0
+cull_mode = 2
+albedo_texture = ExtResource("4_gb64y")
+uv1_offset = Vector3(0.5, 0.5, 0.5)
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_rwjj0"]
+data = PackedVector3Array(-6, 0.5, 5, 6, 0.5, 5, -6, -0.5, 5, 6, 0.5, 5, 6, -0.5, 5, -6, -0.5, 5, 6, 0.5, -5, -6, 0.5, -5, 6, -0.5, -5, -6, 0.5, -5, -6, -0.5, -5, 6, -0.5, -5, 6, 0.5, 5, 6, 0.5, -5, 6, -0.5, 5, 6, 0.5, -5, 6, -0.5, -5, 6, -0.5, 5, -6, 0.5, -5, -6, 0.5, 5, -6, -0.5, -5, -6, 0.5, 5, -6, -0.5, 5, -6, -0.5, -5, 6, 0.5, 5, -6, 0.5, 5, 6, 0.5, -5, -6, 0.5, 5, -6, 0.5, -5, 6, 0.5, -5, -6, -0.5, 5, 6, -0.5, 5, -6, -0.5, -5, 6, -0.5, 5, 6, -0.5, -5, -6, -0.5, -5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3qahv"]
+albedo_texture = ExtResource("5_3not1")
+metallic_specular = 0.0
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="BoxMesh" id="BoxMesh_5rpcg"]
+material = SubResource("StandardMaterial3D_3qahv")
+size = Vector3(12, 1, 10)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_fhu10"]
+radius = 0.25
+height = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vmkqf"]
+transparency = 1
+cull_mode = 2
+albedo_texture = ExtResource("8_jqje3")
+metallic_specular = 0.0
+uv1_offset = Vector3(0, 0.5, 0.5)
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="QuadMesh" id="QuadMesh_77alp"]
+material = SubResource("StandardMaterial3D_vmkqf")
+size = Vector2(10, 1)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_kc1a2"]
+data = PackedVector3Array(5, -0.5, 0, -5, -0.5, 0, 5, 0.5, 0, -5, -0.5, 0, -5, 0.5, 0, 5, 0.5, 0)
+
+[node name="world" type="Node"]
+script = ExtResource("1_wre1y")
+
+[node name="space" type="Node3D" parent="."]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="space"]
+transform = Transform3D(-0.614692, 0.241211, -0.75098, 0.152781, 0.970473, 0.186656, 0.773829, 0, -0.633394, -3.05413, 8.7991, -21.1359)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="space"]
+environment = SubResource("Environment_yvwur")
+
+[node name="water" type="CSGMesh3D" parent="space"]
+transform = Transform3D(4, 0, 0, 0, 3, 0, 0, 0, 4, 0, 1.08032, 0)
+mesh = SubResource("PlaneMesh_lvqvi")
+
+[node name="Camera3D" type="Camera3D" parent="space"]
+transform = Transform3D(-0.335451, 0, -0.942057, 0, 1, 0, 0.942057, 0, -0.335451, -17.37, 4.05983, -21.1359)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="space"]
+transform = Transform3D(0.521611, 0.22082, -0.824112, 0, 0.965926, 0.258819, 0.853183, -0.135003, 0.503837, 5, 13, -1)
+light_color = Color(0.329412, 0.329412, 0.329412, 1)
+light_energy = 15.289
+light_indirect_energy = 16.0
+spot_range = 1011.8
+spot_attenuation = 0.378929
+spot_angle = 29.35
+spot_angle_attenuation = 0.0312499
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="space/SpotLight3D"]
+autoplay = "spin"
+libraries = {
+"": SubResource("AnimationLibrary_ervn6")
+}
+
+[node name="base" type="Node3D" parent="space"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+
+[node name="leg_one" type="CSGMesh3D" parent="space/base"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.08032, -4.34926)
+mesh = SubResource("BoxMesh_auidn")
+material = SubResource("StandardMaterial3D_5a6pd")
+
+[node name="leg_one2" type="CSGMesh3D" parent="space/base"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 1.08032, -4.34926)
+mesh = SubResource("BoxMesh_auidn")
+material = SubResource("StandardMaterial3D_5a6pd")
+
+[node name="leg_one3" type="CSGMesh3D" parent="space/base"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 1.08032, 2.65074)
+mesh = SubResource("BoxMesh_auidn")
+material = SubResource("StandardMaterial3D_5a6pd")
+
+[node name="leg_one4" type="CSGMesh3D" parent="space/base"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1.08032, 2.65074)
+mesh = SubResource("BoxMesh_auidn")
+material = SubResource("StandardMaterial3D_5a6pd")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="space/base"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 5, -1)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="space/base/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_rwjj0")
+
+[node name="block" type="MeshInstance3D" parent="space/base/StaticBody3D"]
+mesh = SubResource("BoxMesh_5rpcg")
+skeleton = NodePath("../../..")
+
+[node name="player" type="CharacterBody3D" parent="space"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.13119, 0)
+script = ExtResource("4_8dcdt")
+
+[node name="player_collider" type="CollisionShape3D" parent="space/player"]
+shape = SubResource("CapsuleShape3D_fhu10")
+
+[node name="player_cam" type="Camera3D" parent="space/player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.239733, 0)
+
+[node name="water_audio" type="AudioStreamPlayer3D" parent="space/player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.82129, 0.0118289)
+stream = ExtResource("5_hnpt7")
+attenuation_model = 1
+unit_size = 15.0
+autoplay = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="space"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -1, 8, -1)
+visible = false
+mesh = SubResource("QuadMesh_77alp")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="space/MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="space/MeshInstance3D/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_kc1a2")
+
+[node name="main_menu" type="Node" parent="."]
+
+[node name="ui_layer" type="CanvasLayer" parent="main_menu"]
+
+[node name="control" type="Control" parent="main_menu/ui_layer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="main_menu/ui_layer/control"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = -41.0
+offset_right = 4.0
+offset_bottom = -41.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("4_615kh")
+theme_override_font_sizes/font_size = 32
+text = "Night on the
+Oil Rig"
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="main_menu/ui_layer/control"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 9.0
+offset_top = 107.0
+offset_right = 40.0
+offset_bottom = 128.0
+theme_override_fonts/font = ExtResource("4_615kh")
+text = "Start"
+
+[connection signal="pressed" from="main_menu/ui_layer/control/Button" to="." method="_on_button_pressed"]
