@@ -51,7 +51,7 @@ void fragment() {
 	//int downscale_factor = int(textureSize(SCREEN_TEXTURE,0).x/downscale_factor);
 	
 	
-	vec4 water_tex = texture(water,topdownProject*.2-TIME*0.0);
+	vec4 water_tex = texture(water,topdownProject*.2*0.25-TIME*0.0);
 	vec4 noise_tex = texture(noise,topdownProject*.2+TIME*0.1);
 	ivec2 uv = ivec2(FRAGCOORD.xy / float(downscale_factor));
 	vec4 color = texelFetch(noise,uv * downscale_factor, 0);
