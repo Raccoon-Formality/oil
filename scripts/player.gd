@@ -31,12 +31,13 @@ func _physics_process(delta):
 	elif Input.is_action_just_pressed("click") and picked_object != null:
 		get_node(picked_object).freeze = false
 		picked_object = null
-	print(picked_object)
+	#print(picked_object)
 	if picked_object != null:
 		get_node(picked_object).global_position = $player_cam/RayCast3D/Node3D.global_position
 		
+		
 	
-	print($player_cam/RayCast3D.get_collider())
+	#print($player_cam/RayCast3D.get_collider())
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var input_dir = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")

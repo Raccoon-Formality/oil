@@ -20,6 +20,7 @@ float random (vec2 uv2) {
 }
 
 varying vec4 worldPos;
+varying vec4 VAR1;
 void vertex() {
 	//some_color = NORMAL; // make the normal the color
 	
@@ -32,12 +33,17 @@ void vertex() {
 	
 	float t2 =  cos((UV.x-offset + TIME * 0.005) * TAU * 50.0) * 0.5 + 0.5 +noise_tex.x;
 	VERTEX.y += round(clamp(t * t2* amp,-1.0,1.0)*20.0)/20.0;
+	//VERTEX.y += clamp(t * t2* amp,-1.0,1.0);
+	
+	VAR1 = vec4(UV * VERTEX.z,VERTEX.z,0);
 	
 }
 
 float InverseLerp(float a, float b, float v) {
 	return (v-a)/(b-a);
 }
+
+uniform sampler2D imagem;
 
 void fragment() {
 	
@@ -61,4 +67,8 @@ void fragment() {
 	vec4 final = mix(water_tex, vec4(1.0), round(noise_tex.x-0.2));
 	
 	ALBEDO = clamp(water_tex.rgb,0.0,1.0);
+	
 }
+
+
+

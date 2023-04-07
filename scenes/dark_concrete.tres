@@ -1,0 +1,13 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://gdnov67edebx"]
+
+[ext_resource type="Texture2D" uid="uid://dch1vsoiqe71b" path="res://assets/concrete_small.jpg" id="1_x2t02"]
+
+[resource]
+albedo_color = Color(0.827451, 0.827451, 0.827451, 1)
+albedo_texture = ExtResource("1_x2t02")
+metallic_specular = 0.0
+uv1_scale = Vector3(0.25, 0.25, 0.25)
+uv1_triplanar = true
+uv1_world_triplanar = true
+uv2_triplanar_sharpness = 0.225313
+texture_filter = 0

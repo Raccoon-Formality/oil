@@ -14,6 +14,8 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	$fps.text = str(Engine.get_frames_per_second())
+	
 	
 	if start:
 		start_cam.global_position  = lerp(start_cam.global_position, player_cam.global_position, 5 * delta)
