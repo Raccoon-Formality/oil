@@ -8,6 +8,8 @@ var start = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	player.set_process_input(false)
 	player.set_physics_process(false)
 
@@ -32,3 +34,21 @@ func _process(delta):
 func _on_button_pressed():
 	start = true
 	$main_menu/ui_layer.hide()
+
+
+func _on_water_area_body_entered(body):
+	if body.is_in_group("player"):
+		$space/watersplash_sound.play()
+		$black_layer.show()
+
+
+func _on_watersplash_sound_finished():
+	get_tree().reload_current_scene()
+
+
+func _on_container_area_body_entered(body):
+	if body.is_in_group("crate"):
+		get_node($space/player.picked_object).gravity_scale = 1.0
+		$space/player.picked_object = null
+		get_tree().get_nodes_in_group("pipe")[0].get_node("parts").emitting = true
+		get_tree().get_nodes_in_group("pipe")[0].get_node("audio").playing = true

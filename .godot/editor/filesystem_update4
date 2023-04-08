@@ -1,9 +1,9 @@
-res://untitled.tscn
 res://scenes/world.tscn
-res://scripts/world.gd
 res://scenes/concrete_texture.tres
-res://scenes/effect.gdshader
+res://scenes/scafold.tres
 res://scenes/dark_concrete.tres
+res://untitled.tscn
 res://scripts/player.gd
-res://shaders/water.gdshader
-res://scenes/steam.gdshader
+res://scripts/world.gd
+res://scenes/barrel.tscn
+res://scenes/floor.tres
