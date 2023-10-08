@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://7eulu5m7ogsq"]
+
+[ext_resource type="PackedScene" uid="uid://cftch3o8csfyc" path="res://assets/spine/untitled.glb" id="1_ba002"]
+[ext_resource type="Texture2D" uid="uid://dk35av5605ran" path="res://assets/green.jpg" id="2_n4e4a"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_chlbs"]
+albedo_texture = ExtResource("2_n4e4a")
+metallic_specular = 0.0
+uv1_scale = Vector3(0.25, 0.25, 0.25)
+uv1_triplanar = true
+uv1_world_triplanar = true
+texture_filter = 0
+
+[node name="untitled" instance=ExtResource("1_ba002")]
+
+[node name="Skeleton3D" parent="Armature" index="0"]
+top_level = true
+animate_physical_bones = false
+bones/3/rotation = Quaternion(-0.027525, 0.000474975, 0.000474975, 1.00048)
+bones/4/rotation = Quaternion(-0.264525, 0.073475, 0.000474975, 1.00048)
+bones/5/rotation = Quaternion(-0.384525, -0.089525, -0.262525, 1.00048)
+bones/6/rotation = Quaternion(-0.323525, 0.000474975, 1.20748, 1.00048)
+
+[node name="Cylinder" parent="Armature/Skeleton3D" index="0"]
+lod_bias = 128.0
+surface_material_override/0 = SubResource("StandardMaterial3D_chlbs")

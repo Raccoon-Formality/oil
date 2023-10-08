@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://bfji327wynq3g"]
+
+[ext_resource type="PackedScene" uid="uid://byj55vqoyidto" path="res://assets/New Folder/Fisher_Boat.fbx" id="1_3xaxt"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f805u"]
+albedo_color = Color(0, 0.2, 0.0980392, 1)
+
+[node name="Fisher_Boat" instance=ExtResource("1_3xaxt")]
+
+[node name="Fisher_Boat" parent="RootNode" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_f805u")

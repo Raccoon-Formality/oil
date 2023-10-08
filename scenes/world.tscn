@@ -1,4 +1,4 @@
-[gd_scene load_steps=107 format=3 uid="uid://6q6g13360wry"]
+[gd_scene load_steps=116 format=3 uid="uid://b5518yrpxkrfu"]
 
 [ext_resource type="Script" path="res://scripts/world.gd" id="1_wre1y"]
 [ext_resource type="Shader" path="res://shaders/water.gdshader" id="2_p47a0"]
@@ -20,16 +20,21 @@
 [ext_resource type="AudioStream" uid="uid://bx3qyhshbkwod" path="res://assets/metal-creaks.wav" id="10_ouy2m"]
 [ext_resource type="Texture2D" uid="uid://bfkm21hv23xyt" path="res://assets/Crate_generic_01.png" id="10_xsfhn"]
 [ext_resource type="Shader" path="res://scenes/steam.gdshader" id="10_xy6a1"]
-[ext_resource type="PackedScene" uid="uid://di37qqjm55axm" path="res://untitled.tscn" id="11_qjivj"]
+[ext_resource type="AudioStream" uid="uid://bx6c7mionp7n1" path="res://assets/242412__speedenza__random-glitch-tones.wav" id="11_ijxtf"]
 [ext_resource type="Texture2D" uid="uid://dp3kk0mpna4cg" path="res://assets/red.png" id="13_4aum0"]
-[ext_resource type="Texture2D" uid="uid://c7u78m02m8r2a" path="res://assets/unknown2.png" id="13_8sq03"]
 [ext_resource type="AudioStream" uid="uid://fta8oes1upcd" path="res://assets/blowoff.wav" id="14_c3idw"]
 [ext_resource type="Material" uid="uid://dyp680nuewixi" path="res://scenes/dark_red.tres" id="15_p0y8v"]
 [ext_resource type="Shader" path="res://scenes/effect.gdshader" id="15_yf5ig"]
 [ext_resource type="Texture2D" uid="uid://wjo0gu4n515x" path="res://assets/lines.png" id="18_53rik"]
 [ext_resource type="AudioStream" uid="uid://ggvvgihjn1wt" path="res://assets/valve_re.wav" id="18_747k5"]
+[ext_resource type="Script" path="res://scripts/button.gd" id="20_wj2rp"]
 [ext_resource type="PackedScene" uid="uid://bfxrw2kr1a28u" path="res://scenes/barrel.tscn" id="21_bkaq4"]
+[ext_resource type="Script" path="res://scripts/crate.gd" id="21_ob6ga"]
 [ext_resource type="AudioStream" uid="uid://g5kr0psltk08" path="res://assets/piston-loop.wav" id="26_gliho"]
+[ext_resource type="Script" path="res://scripts/valve.gd" id="27_u5pcw"]
+[ext_resource type="PackedScene" uid="uid://7eulu5m7ogsq" path="res://scenes/untitled.tscn" id="31_1dl00"]
+[ext_resource type="PackedScene" uid="uid://bfji327wynq3g" path="res://scenes/fisher_boat.tscn" id="32_k4qoc"]
+[ext_resource type="AudioStream" uid="uid://dqjh6x2lnlnwk" path="res://assets/crash.wav" id="35_yrcs5"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_s4wyr"]
 panorama = ExtResource("3_gwfga")
@@ -39,16 +44,15 @@ sky_material = SubResource("PanoramaSkyMaterial_s4wyr")
 
 [sub_resource type="Environment" id="Environment_yvwur"]
 background_mode = 2
-background_color = Color(1, 1, 1, 1)
 sky = SubResource("Sky_dwxub")
 ambient_light_source = 2
-ambient_light_color = Color(1, 1, 1, 1)
-ambient_light_energy = 1.28
+ambient_light_color = Color(0.741176, 0.741176, 0.741176, 1)
 tonemap_exposure = 0.17
 fog_enabled = true
+fog_light_color = Color(0.243137, 0.266667, 0.301961, 1)
 fog_light_energy = 1.67
 volumetric_fog_enabled = true
-volumetric_fog_albedo = Color(0.168627, 0.168627, 0.168627, 1)
+volumetric_fog_albedo = Color(0.231373, 0.231373, 0.231373, 1)
 volumetric_fog_length = 78.73
 volumetric_fog_ambient_inject = 0.22
 
@@ -230,9 +234,6 @@ _data = {
 "loop": SubResource("Animation_14pdv")
 }
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yiv88"]
-albedo_texture = ExtResource("13_8sq03")
-
 [sub_resource type="BoxMesh" id="BoxMesh_kbx5c"]
 size = Vector3(10, 6, 0.8)
 
@@ -253,40 +254,6 @@ size = Vector3(6, 0.2, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_njd11"]
 size = Vector3(0.9, 0.1, 1)
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_wt2t2"]
-top_radius = 0.25
-bottom_radius = 0.25
-radial_segments = 8
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_ficad"]
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_qlu8b"]
-noise = SubResource("FastNoiseLite_ficad")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_u2emv"]
-render_priority = 0
-shader = ExtResource("10_xy6a1")
-shader_parameter/noise = SubResource("NoiseTexture2D_qlu8b")
-
-[sub_resource type="QuadMesh" id="QuadMesh_05uo7"]
-material = SubResource("ShaderMaterial_u2emv")
-
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_ape58"]
-data = PackedVector3Array(0, 1, 0.25, 0.1768, 1, 0.1768, 0, 0.6, 0.25, 0.1768, 1, 0.1768, 0.1768, 0.6, 0.1768, 0, 0.6, 0.25, 0.1768, 1, 0.1768, 0.25, 1, 0, 0.1768, 0.6, 0.1768, 0.25, 1, 0, 0.25, 0.6, 0, 0.1768, 0.6, 0.1768, 0.25, 1, 0, 0.1768, 1, -0.1768, 0.25, 0.6, 0, 0.1768, 1, -0.1768, 0.1768, 0.6, -0.1768, 0.25, 0.6, 0, 0.1768, 1, -0.1768, 0, 1, -0.25, 0.1768, 0.6, -0.1768, 0, 1, -0.25, 0, 0.6, -0.25, 0.1768, 0.6, -0.1768, 0, 1, -0.25, -0.1768, 1, -0.1768, 0, 0.6, -0.25, -0.1768, 1, -0.1768, -0.1768, 0.6, -0.1768, 0, 0.6, -0.25, -0.1768, 1, -0.1768, -0.25, 1, 0, -0.1768, 0.6, -0.1768, -0.25, 1, 0, -0.25, 0.6, 0, -0.1768, 0.6, -0.1768, -0.25, 1, 0, -0.1768, 1, 0.1768, -0.25, 0.6, 0, -0.1768, 1, 0.1768, -0.1768, 0.6, 0.1768, -0.25, 0.6, 0, -0.1768, 1, 0.1768, 0, 1, 0.25, -0.1768, 0.6, 0.1768, 0, 1, 0.25, 0, 0.6, 0.25, -0.1768, 0.6, 0.1768, 0, 0.6, 0.25, 0.1768, 0.6, 0.1768, 0, 0.2, 0.25, 0.1768, 0.6, 0.1768, 0.1768, 0.2, 0.1768, 0, 0.2, 0.25, 0.1768, 0.6, 0.1768, 0.25, 0.6, 0, 0.1768, 0.2, 0.1768, 0.25, 0.6, 0, 0.25, 0.2, 0, 0.1768, 0.2, 0.1768, 0.25, 0.6, 0, 0.1768, 0.6, -0.1768, 0.25, 0.2, 0, 0.1768, 0.6, -0.1768, 0.1768, 0.2, -0.1768, 0.25, 0.2, 0, 0.1768, 0.6, -0.1768, 0, 0.6, -0.25, 0.1768, 0.2, -0.1768, 0, 0.6, -0.25, 0, 0.2, -0.25, 0.1768, 0.2, -0.1768, 0, 0.6, -0.25, -0.1768, 0.6, -0.1768, 0, 0.2, -0.25, -0.1768, 0.6, -0.1768, -0.1768, 0.2, -0.1768, 0, 0.2, -0.25, -0.1768, 0.6, -0.1768, -0.25, 0.6, 0, -0.1768, 0.2, -0.1768, -0.25, 0.6, 0, -0.25, 0.2, 0, -0.1768, 0.2, -0.1768, -0.25, 0.6, 0, -0.1768, 0.6, 0.1768, -0.25, 0.2, 0, -0.1768, 0.6, 0.1768, -0.1768, 0.2, 0.1768, -0.25, 0.2, 0, -0.1768, 0.6, 0.1768, 0, 0.6, 0.25, -0.1768, 0.2, 0.1768, 0, 0.6, 0.25, 0, 0.2, 0.25, -0.1768, 0.2, 0.1768, 0, 0.2, 0.25, 0.1768, 0.2, 0.1768, 0, -0.2, 0.25, 0.1768, 0.2, 0.1768, 0.1768, -0.2, 0.1768, 0, -0.2, 0.25, 0.1768, 0.2, 0.1768, 0.25, 0.2, 0, 0.1768, -0.2, 0.1768, 0.25, 0.2, 0, 0.25, -0.2, 0, 0.1768, -0.2, 0.1768, 0.25, 0.2, 0, 0.1768, 0.2, -0.1768, 0.25, -0.2, 0, 0.1768, 0.2, -0.1768, 0.1768, -0.2, -0.1768, 0.25, -0.2, 0, 0.1768, 0.2, -0.1768, 0, 0.2, -0.25, 0.1768, -0.2, -0.1768, 0, 0.2, -0.25, 0, -0.2, -0.25, 0.1768, -0.2, -0.1768, 0, 0.2, -0.25, -0.1768, 0.2, -0.1768, 0, -0.2, -0.25, -0.1768, 0.2, -0.1768, -0.1768, -0.2, -0.1768, 0, -0.2, -0.25, -0.1768, 0.2, -0.1768, -0.25, 0.2, 0, -0.1768, -0.2, -0.1768, -0.25, 0.2, 0, -0.25, -0.2, 0, -0.1768, -0.2, -0.1768, -0.25, 0.2, 0, -0.1768, 0.2, 0.1768, -0.25, -0.2, 0, -0.1768, 0.2, 0.1768, -0.1768, -0.2, 0.1768, -0.25, -0.2, 0, -0.1768, 0.2, 0.1768, 0, 0.2, 0.25, -0.1768, -0.2, 0.1768, 0, 0.2, 0.25, 0, -0.2, 0.25, -0.1768, -0.2, 0.1768, 0, -0.2, 0.25, 0.1768, -0.2, 0.1768, 0, -0.6, 0.25, 0.1768, -0.2, 0.1768, 0.1768, -0.6, 0.1768, 0, -0.6, 0.25, 0.1768, -0.2, 0.1768, 0.25, -0.2, 0, 0.1768, -0.6, 0.1768, 0.25, -0.2, 0, 0.25, -0.6, 0, 0.1768, -0.6, 0.1768, 0.25, -0.2, 0, 0.1768, -0.2, -0.1768, 0.25, -0.6, 0, 0.1768, -0.2, -0.1768, 0.1768, -0.6, -0.1768, 0.25, -0.6, 0, 0.1768, -0.2, -0.1768, 0, -0.2, -0.25, 0.1768, -0.6, -0.1768, 0, -0.2, -0.25, 0, -0.6, -0.25, 0.1768, -0.6, -0.1768, 0, -0.2, -0.25, -0.1768, -0.2, -0.1768, 0, -0.6, -0.25, -0.1768, -0.2, -0.1768, -0.1768, -0.6, -0.1768, 0, -0.6, -0.25, -0.1768, -0.2, -0.1768, -0.25, -0.2, 0, -0.1768, -0.6, -0.1768, -0.25, -0.2, 0, -0.25, -0.6, 0, -0.1768, -0.6, -0.1768, -0.25, -0.2, 0, -0.1768, -0.2, 0.1768, -0.25, -0.6, 0, -0.1768, -0.2, 0.1768, -0.1768, -0.6, 0.1768, -0.25, -0.6, 0, -0.1768, -0.2, 0.1768, 0, -0.2, 0.25, -0.1768, -0.6, 0.1768, 0, -0.2, 0.25, 0, -0.6, 0.25, -0.1768, -0.6, 0.1768, 0, -0.6, 0.25, 0.1768, -0.6, 0.1768, 0, -1, 0.25, 0.1768, -0.6, 0.1768, 0.1768, -1, 0.1768, 0, -1, 0.25, 0.1768, -0.6, 0.1768, 0.25, -0.6, 0, 0.1768, -1, 0.1768, 0.25, -0.6, 0, 0.25, -1, 0, 0.1768, -1, 0.1768, 0.25, -0.6, 0, 0.1768, -0.6, -0.1768, 0.25, -1, 0, 0.1768, -0.6, -0.1768, 0.1768, -1, -0.1768, 0.25, -1, 0, 0.1768, -0.6, -0.1768, 0, -0.6, -0.25, 0.1768, -1, -0.1768, 0, -0.6, -0.25, 0, -1, -0.25, 0.1768, -1, -0.1768, 0, -0.6, -0.25, -0.1768, -0.6, -0.1768, 0, -1, -0.25, -0.1768, -0.6, -0.1768, -0.1768, -1, -0.1768, 0, -1, -0.25, -0.1768, -0.6, -0.1768, -0.25, -0.6, 0, -0.1768, -1, -0.1768, -0.25, -0.6, 0, -0.25, -1, 0, -0.1768, -1, -0.1768, -0.25, -0.6, 0, -0.1768, -0.6, 0.1768, -0.25, -1, 0, -0.1768, -0.6, 0.1768, -0.1768, -1, 0.1768, -0.25, -1, 0, -0.1768, -0.6, 0.1768, 0, -0.6, 0.25, -0.1768, -1, 0.1768, 0, -0.6, 0.25, 0, -1, 0.25, -0.1768, -1, 0.1768, 0, 1, 0, 0.1768, 1, 0.1768, 0, 1, 0.25, 0, 1, 0, 0.25, 1, 0, 0.1768, 1, 0.1768, 0, 1, 0, 0.1768, 1, -0.1768, 0.25, 1, 0, 0, 1, 0, 0, 1, -0.25, 0.1768, 1, -0.1768, 0, 1, 0, -0.1768, 1, -0.1768, 0, 1, -0.25, 0, 1, 0, -0.25, 1, 0, -0.1768, 1, -0.1768, 0, 1, 0, -0.1768, 1, 0.1768, -0.25, 1, 0, 0, 1, 0, 0, 1, 0.25, -0.1768, 1, 0.1768, 0, -1, 0, 0, -1, 0.25, 0.1768, -1, 0.1768, 0, -1, 0, 0.1768, -1, 0.1768, 0.25, -1, 0, 0, -1, 0, 0.25, -1, 0, 0.1768, -1, -0.1768, 0, -1, 0, 0.1768, -1, -0.1768, 0, -1, -0.25, 0, -1, 0, 0, -1, -0.25, -0.1768, -1, -0.1768, 0, -1, 0, -0.1768, -1, -0.1768, -0.25, -1, 0, 0, -1, 0, -0.25, -1, 0, -0.1768, -1, 0.1768, 0, -1, 0, -0.1768, -1, 0.1768, 0, -1, 0.25)
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_25k4x"]
-radius = 0.189718
-
-[sub_resource type="TorusMesh" id="TorusMesh_2dx4b"]
-material = ExtResource("15_p0y8v")
-inner_radius = 0.1
-outer_radius = 0.179
-rings = 8
-ring_segments = 4
-
-[sub_resource type="BoxMesh" id="BoxMesh_4kvvt"]
-size = Vector3(0.05, 0.05, 0.25)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vmkqf"]
 transparency = 1
@@ -325,12 +292,45 @@ size = Vector2(2, 1)
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_xouv0"]
 data = PackedVector3Array(1, -0.5, 0, -1, -0.5, 0, 1, 0.5, 0, -1, -0.5, 0, -1, 0.5, 0, 1, 0.5, 0)
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_sm12e"]
+radius = 1.0
+
 [sub_resource type="BoxMesh" id="BoxMesh_vxvno"]
 size = Vector3(0.1, 0.8, 0.1)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_fhu10"]
 radius = 0.25
 height = 1.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_l0mx6"]
+material = ExtResource("15_p0y8v")
+top_radius = 0.1
+bottom_radius = 0.1
+height = 0.35
+radial_segments = 8
+
+[sub_resource type="Animation" id="Animation_aaoob"]
+resource_name = "press"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(1, 0.6, 1), Vector3(1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ya3ob"]
+_data = {
+"press": SubResource("Animation_aaoob")
+}
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3fi7i"]
+size = Vector3(0.25, 0.5, 0.25)
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_wvva8"]
 rough = true
@@ -350,6 +350,40 @@ texture_filter = 0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_22ixa"]
 size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_wt2t2"]
+top_radius = 0.25
+bottom_radius = 0.25
+radial_segments = 8
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_ape58"]
+data = PackedVector3Array(0, 1, 0.25, 0.1768, 1, 0.1768, 0, 0.6, 0.25, 0.1768, 1, 0.1768, 0.1768, 0.6, 0.1768, 0, 0.6, 0.25, 0.1768, 1, 0.1768, 0.25, 1, 0, 0.1768, 0.6, 0.1768, 0.25, 1, 0, 0.25, 0.6, 0, 0.1768, 0.6, 0.1768, 0.25, 1, 0, 0.1768, 1, -0.1768, 0.25, 0.6, 0, 0.1768, 1, -0.1768, 0.1768, 0.6, -0.1768, 0.25, 0.6, 0, 0.1768, 1, -0.1768, 0, 1, -0.25, 0.1768, 0.6, -0.1768, 0, 1, -0.25, 0, 0.6, -0.25, 0.1768, 0.6, -0.1768, 0, 1, -0.25, -0.1768, 1, -0.1768, 0, 0.6, -0.25, -0.1768, 1, -0.1768, -0.1768, 0.6, -0.1768, 0, 0.6, -0.25, -0.1768, 1, -0.1768, -0.25, 1, 0, -0.1768, 0.6, -0.1768, -0.25, 1, 0, -0.25, 0.6, 0, -0.1768, 0.6, -0.1768, -0.25, 1, 0, -0.1768, 1, 0.1768, -0.25, 0.6, 0, -0.1768, 1, 0.1768, -0.1768, 0.6, 0.1768, -0.25, 0.6, 0, -0.1768, 1, 0.1768, 0, 1, 0.25, -0.1768, 0.6, 0.1768, 0, 1, 0.25, 0, 0.6, 0.25, -0.1768, 0.6, 0.1768, 0, 0.6, 0.25, 0.1768, 0.6, 0.1768, 0, 0.2, 0.25, 0.1768, 0.6, 0.1768, 0.1768, 0.2, 0.1768, 0, 0.2, 0.25, 0.1768, 0.6, 0.1768, 0.25, 0.6, 0, 0.1768, 0.2, 0.1768, 0.25, 0.6, 0, 0.25, 0.2, 0, 0.1768, 0.2, 0.1768, 0.25, 0.6, 0, 0.1768, 0.6, -0.1768, 0.25, 0.2, 0, 0.1768, 0.6, -0.1768, 0.1768, 0.2, -0.1768, 0.25, 0.2, 0, 0.1768, 0.6, -0.1768, 0, 0.6, -0.25, 0.1768, 0.2, -0.1768, 0, 0.6, -0.25, 0, 0.2, -0.25, 0.1768, 0.2, -0.1768, 0, 0.6, -0.25, -0.1768, 0.6, -0.1768, 0, 0.2, -0.25, -0.1768, 0.6, -0.1768, -0.1768, 0.2, -0.1768, 0, 0.2, -0.25, -0.1768, 0.6, -0.1768, -0.25, 0.6, 0, -0.1768, 0.2, -0.1768, -0.25, 0.6, 0, -0.25, 0.2, 0, -0.1768, 0.2, -0.1768, -0.25, 0.6, 0, -0.1768, 0.6, 0.1768, -0.25, 0.2, 0, -0.1768, 0.6, 0.1768, -0.1768, 0.2, 0.1768, -0.25, 0.2, 0, -0.1768, 0.6, 0.1768, 0, 0.6, 0.25, -0.1768, 0.2, 0.1768, 0, 0.6, 0.25, 0, 0.2, 0.25, -0.1768, 0.2, 0.1768, 0, 0.2, 0.25, 0.1768, 0.2, 0.1768, 0, -0.2, 0.25, 0.1768, 0.2, 0.1768, 0.1768, -0.2, 0.1768, 0, -0.2, 0.25, 0.1768, 0.2, 0.1768, 0.25, 0.2, 0, 0.1768, -0.2, 0.1768, 0.25, 0.2, 0, 0.25, -0.2, 0, 0.1768, -0.2, 0.1768, 0.25, 0.2, 0, 0.1768, 0.2, -0.1768, 0.25, -0.2, 0, 0.1768, 0.2, -0.1768, 0.1768, -0.2, -0.1768, 0.25, -0.2, 0, 0.1768, 0.2, -0.1768, 0, 0.2, -0.25, 0.1768, -0.2, -0.1768, 0, 0.2, -0.25, 0, -0.2, -0.25, 0.1768, -0.2, -0.1768, 0, 0.2, -0.25, -0.1768, 0.2, -0.1768, 0, -0.2, -0.25, -0.1768, 0.2, -0.1768, -0.1768, -0.2, -0.1768, 0, -0.2, -0.25, -0.1768, 0.2, -0.1768, -0.25, 0.2, 0, -0.1768, -0.2, -0.1768, -0.25, 0.2, 0, -0.25, -0.2, 0, -0.1768, -0.2, -0.1768, -0.25, 0.2, 0, -0.1768, 0.2, 0.1768, -0.25, -0.2, 0, -0.1768, 0.2, 0.1768, -0.1768, -0.2, 0.1768, -0.25, -0.2, 0, -0.1768, 0.2, 0.1768, 0, 0.2, 0.25, -0.1768, -0.2, 0.1768, 0, 0.2, 0.25, 0, -0.2, 0.25, -0.1768, -0.2, 0.1768, 0, -0.2, 0.25, 0.1768, -0.2, 0.1768, 0, -0.6, 0.25, 0.1768, -0.2, 0.1768, 0.1768, -0.6, 0.1768, 0, -0.6, 0.25, 0.1768, -0.2, 0.1768, 0.25, -0.2, 0, 0.1768, -0.6, 0.1768, 0.25, -0.2, 0, 0.25, -0.6, 0, 0.1768, -0.6, 0.1768, 0.25, -0.2, 0, 0.1768, -0.2, -0.1768, 0.25, -0.6, 0, 0.1768, -0.2, -0.1768, 0.1768, -0.6, -0.1768, 0.25, -0.6, 0, 0.1768, -0.2, -0.1768, 0, -0.2, -0.25, 0.1768, -0.6, -0.1768, 0, -0.2, -0.25, 0, -0.6, -0.25, 0.1768, -0.6, -0.1768, 0, -0.2, -0.25, -0.1768, -0.2, -0.1768, 0, -0.6, -0.25, -0.1768, -0.2, -0.1768, -0.1768, -0.6, -0.1768, 0, -0.6, -0.25, -0.1768, -0.2, -0.1768, -0.25, -0.2, 0, -0.1768, -0.6, -0.1768, -0.25, -0.2, 0, -0.25, -0.6, 0, -0.1768, -0.6, -0.1768, -0.25, -0.2, 0, -0.1768, -0.2, 0.1768, -0.25, -0.6, 0, -0.1768, -0.2, 0.1768, -0.1768, -0.6, 0.1768, -0.25, -0.6, 0, -0.1768, -0.2, 0.1768, 0, -0.2, 0.25, -0.1768, -0.6, 0.1768, 0, -0.2, 0.25, 0, -0.6, 0.25, -0.1768, -0.6, 0.1768, 0, -0.6, 0.25, 0.1768, -0.6, 0.1768, 0, -1, 0.25, 0.1768, -0.6, 0.1768, 0.1768, -1, 0.1768, 0, -1, 0.25, 0.1768, -0.6, 0.1768, 0.25, -0.6, 0, 0.1768, -1, 0.1768, 0.25, -0.6, 0, 0.25, -1, 0, 0.1768, -1, 0.1768, 0.25, -0.6, 0, 0.1768, -0.6, -0.1768, 0.25, -1, 0, 0.1768, -0.6, -0.1768, 0.1768, -1, -0.1768, 0.25, -1, 0, 0.1768, -0.6, -0.1768, 0, -0.6, -0.25, 0.1768, -1, -0.1768, 0, -0.6, -0.25, 0, -1, -0.25, 0.1768, -1, -0.1768, 0, -0.6, -0.25, -0.1768, -0.6, -0.1768, 0, -1, -0.25, -0.1768, -0.6, -0.1768, -0.1768, -1, -0.1768, 0, -1, -0.25, -0.1768, -0.6, -0.1768, -0.25, -0.6, 0, -0.1768, -1, -0.1768, -0.25, -0.6, 0, -0.25, -1, 0, -0.1768, -1, -0.1768, -0.25, -0.6, 0, -0.1768, -0.6, 0.1768, -0.25, -1, 0, -0.1768, -0.6, 0.1768, -0.1768, -1, 0.1768, -0.25, -1, 0, -0.1768, -0.6, 0.1768, 0, -0.6, 0.25, -0.1768, -1, 0.1768, 0, -0.6, 0.25, 0, -1, 0.25, -0.1768, -1, 0.1768, 0, 1, 0, 0.1768, 1, 0.1768, 0, 1, 0.25, 0, 1, 0, 0.25, 1, 0, 0.1768, 1, 0.1768, 0, 1, 0, 0.1768, 1, -0.1768, 0.25, 1, 0, 0, 1, 0, 0, 1, -0.25, 0.1768, 1, -0.1768, 0, 1, 0, -0.1768, 1, -0.1768, 0, 1, -0.25, 0, 1, 0, -0.25, 1, 0, -0.1768, 1, -0.1768, 0, 1, 0, -0.1768, 1, 0.1768, -0.25, 1, 0, 0, 1, 0, 0, 1, 0.25, -0.1768, 1, 0.1768, 0, -1, 0, 0, -1, 0.25, 0.1768, -1, 0.1768, 0, -1, 0, 0.1768, -1, 0.1768, 0.25, -1, 0, 0, -1, 0, 0.25, -1, 0, 0.1768, -1, -0.1768, 0, -1, 0, 0.1768, -1, -0.1768, 0, -1, -0.25, 0, -1, 0, 0, -1, -0.25, -0.1768, -1, -0.1768, 0, -1, 0, -0.1768, -1, -0.1768, -0.25, -1, 0, 0, -1, 0, -0.25, -1, 0, -0.1768, -1, 0.1768, 0, -1, 0, -0.1768, -1, 0.1768, 0, -1, 0.25)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_25k4x"]
+radius = 0.189718
+
+[sub_resource type="TorusMesh" id="TorusMesh_2dx4b"]
+material = ExtResource("15_p0y8v")
+inner_radius = 0.1
+outer_radius = 0.179
+rings = 8
+ring_segments = 4
+
+[sub_resource type="BoxMesh" id="BoxMesh_4kvvt"]
+size = Vector3(0.05, 0.05, 0.25)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ficad"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_qlu8b"]
+noise = SubResource("FastNoiseLite_ficad")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u2emv"]
+render_priority = 0
+shader = ExtResource("10_xy6a1")
+shader_parameter/noise = SubResource("NoiseTexture2D_qlu8b")
+
+[sub_resource type="QuadMesh" id="QuadMesh_05uo7"]
+material = SubResource("ShaderMaterial_u2emv")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_jcibx"]
 size = Vector3(0.5, 0.5, 0.5)
@@ -419,7 +453,7 @@ mesh = SubResource("PlaneMesh_lvqvi")
 transform = Transform3D(-0.335451, 0, -0.942057, 0, 1, 0, 0.942057, 0, -0.335451, -17.37, 4.05983, -21.1359)
 
 [node name="SpotLight3D" type="SpotLight3D" parent="space"]
-transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 9.60775, 14.9459, -4.70089)
+transform = Transform3D(0.809019, 0.152129, -0.567754, 0, 0.965926, 0.258819, 0.587782, -0.209389, 0.781453, 9.60775, 14.9459, -4.70089)
 light_color = Color(0.52549, 0.52549, 0, 1)
 light_energy = 16.0
 light_indirect_energy = 16.0
@@ -625,19 +659,26 @@ mesh = SubResource("CylinderMesh_csubm")
 skeleton = NodePath("../legupper3")
 surface_material_override/0 = ExtResource("6_63mbl")
 
-[node name="oil_piston" type="MeshInstance3D" parent="space/base"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 1, 14.4)
-mesh = SubResource("CylinderMesh_vl5tl")
-surface_material_override/0 = SubResource("StandardMaterial3D_vnhcu")
+[node name="comp_sound" type="AudioStreamPlayer3D" parent="space/base"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.9, 6, 12.4)
+stream = ExtResource("11_ijxtf")
+volume_db = -20.0
+unit_size = 2.33
+max_db = -2.0
 
-[node name="oil_piston_sound" type="AudioStreamPlayer3D" parent="space/base/oil_piston"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0999994, 5, 9.53674e-07)
+[node name="oil_piston_sound" type="AudioStreamPlayer3D" parent="space/base"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.9, 6, 14.4)
 stream = ExtResource("26_gliho")
 volume_db = 20.363
 unit_size = 2.33
 max_db = 6.0
 pitch_scale = 0.79
 autoplay = true
+
+[node name="oil_piston" type="MeshInstance3D" parent="space/base"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 1, 14.4)
+mesh = SubResource("CylinderMesh_vl5tl")
+surface_material_override/0 = SubResource("StandardMaterial3D_vnhcu")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="space/base/oil_piston"]
 autoplay = "loop"
@@ -668,7 +709,7 @@ material = ExtResource("6_63mbl")
 [node name="CSGPolygon3D" type="CSGPolygon3D" parent="space/base/base2"]
 transform = Transform3D(-8.74228e-08, -4.37114e-08, 1, 1, -4.37114e-08, 8.74228e-08, 4.37114e-08, 1, 4.37114e-08, 5.3, 4.4, -3)
 polygon = PackedVector2Array(0, 0, 0, 1, 0.6, 0.8, 0.8, 0.4)
-material = SubResource("StandardMaterial3D_yiv88")
+material = ExtResource("7_x20w0")
 
 [node name="wall_left" type="MeshInstance3D" parent="space/base"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 10.5, 8.5, 0)
@@ -1079,58 +1120,6 @@ shape = SubResource("BoxShape3D_sgfiw")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.08555, 2.45, 0)
 shape = SubResource("BoxShape3D_njd11")
 
-[node name="pipes" type="MeshInstance3D" parent="space/base" groups=["pipe"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 6.2, 0)
-mesh = SubResource("CylinderMesh_wt2t2")
-surface_material_override/0 = SubResource("StandardMaterial3D_vnhcu")
-
-[node name="parts" type="CPUParticles3D" parent="space/base/pipes"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, -0.2)
-emitting = false
-amount = 20
-mesh = SubResource("QuadMesh_05uo7")
-gravity = Vector3(0, 0, 0)
-initial_velocity_min = 12.58
-initial_velocity_max = 12.58
-
-[node name="audio" type="AudioStreamPlayer3D" parent="space/base/pipes"]
-stream = ExtResource("14_c3idw")
-volume_db = -20.0
-max_db = -8.0
-pitch_scale = 0.5
-
-[node name="valve_audio" type="AudioStreamPlayer" parent="space/base/pipes"]
-stream = ExtResource("18_747k5")
-volume_db = -10.0
-pitch_scale = 0.89
-
-[node name="StaticBody3D" type="StaticBody3D" parent="space/base/pipes"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="space/base/pipes/StaticBody3D"]
-shape = SubResource("ConcavePolygonShape3D_ape58")
-
-[node name="valve_body" type="StaticBody3D" parent="space/base" groups=["valve"]]
-transform = Transform3D(0.5, -0.866025, 3.78552e-08, 0, -4.37114e-08, -1, 0.866025, 0.5, -2.18557e-08, 8.78345, 6.23304, 0.116116)
-collision_layer = 128
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="space/base/valve_body"]
-shape = SubResource("SphereShape3D_25k4x")
-
-[node name="valve" type="MeshInstance3D" parent="space/base/valve_body"]
-transform = Transform3D(1, 0, 0, 0, 1, -1.77636e-15, 0, 1.77636e-15, 1, 0, 0, 0)
-mesh = SubResource("TorusMesh_2dx4b")
-skeleton = NodePath("../..")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="space/base/valve_body/valve"]
-transform = Transform3D(1, 0, 0, 0, 1, -8.88178e-16, 0, 1.77636e-15, 1, 0, -0.01, 0)
-mesh = SubResource("BoxMesh_4kvvt")
-surface_material_override/0 = ExtResource("15_p0y8v")
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="space/base/valve_body/valve"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, -0.01, 0)
-mesh = SubResource("BoxMesh_4kvvt")
-surface_material_override/0 = ExtResource("15_p0y8v")
-
 [node name="railing" type="MeshInstance3D" parent="space/base"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -1, 6, -1)
 mesh = SubResource("QuadMesh_77alp")
@@ -1184,6 +1173,16 @@ surface_material_override/0 = SubResource("StandardMaterial3D_vmkqf")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="space/base/railing3/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_xouv0")
+
+[node name="final_des" type="Area3D" parent="space/base"]
+transform = Transform3D(0.559193, 0, -0.829038, 0, 1, 0, 0.829038, 0, 0.559193, 9.60951, 11.3958, -4.7)
+
+[node name="final_cam" type="Camera3D" parent="space/base/final_des"]
+transform = Transform3D(-2.08616e-07, 0, 1, 0, 1, 0, -1, 0, -2.08616e-07, -0.221728, 0, -0.0289345)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="space/base/final_des"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.165807, 0, 0.111838)
+shape = SubResource("SphereShape3D_sm12e")
 
 [node name="lookout_csg" type="CSGCombiner3D" parent="space/base"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
@@ -1244,7 +1243,7 @@ hit_from_inside = true
 debug_shape_custom_color = Color(1, 1, 1, 1)
 
 [node name="Node3D" type="Node3D" parent="space/player/player_cam/RayCast3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, -1.25)
 
 [node name="walking_audio" type="AudioStreamPlayer" parent="space/player"]
 stream = ExtResource("9_10utx")
@@ -1265,6 +1264,23 @@ attenuation_model = 1
 max_db = -5.0
 autoplay = true
 
+[node name="button_body" type="StaticBody3D" parent="space" groups=["button"]]
+transform = Transform3D(-1, -2.30477e-08, -1.36849e-07, 3.69465e-08, 0.906308, -0.422618, 1.33767e-07, -0.422618, -0.906308, 7.08333, 8.08032, 12.7836)
+collision_layer = 128
+script = ExtResource("20_wj2rp")
+
+[node name="button" type="MeshInstance3D" parent="space/button_body"]
+mesh = SubResource("CylinderMesh_l0mx6")
+skeleton = NodePath("../../base/base2")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="space/button_body/button"]
+libraries = {
+"": SubResource("AnimationLibrary_ya3ob")
+}
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="space/button_body"]
+shape = SubResource("BoxShape3D_3fi7i")
+
 [node name="crate" type="RigidBody3D" parent="space" groups=["crate"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 10.35, -4)
 collision_layer = 129
@@ -1280,6 +1296,68 @@ surface_material_override/0 = SubResource("StandardMaterial3D_lsmc0")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="space/crate"]
 shape = SubResource("BoxShape3D_22ixa")
+
+[node name="crate_static" type="StaticBody3D" parent="space/crate"]
+collision_layer = 128
+script = ExtResource("21_ob6ga")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="space/crate/crate_static"]
+shape = SubResource("BoxShape3D_22ixa")
+
+[node name="pipes" type="MeshInstance3D" parent="space" groups=["pipe"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 8.2, 0)
+mesh = SubResource("CylinderMesh_wt2t2")
+skeleton = NodePath("../base")
+surface_material_override/0 = SubResource("StandardMaterial3D_vnhcu")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="space/pipes"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="space/pipes/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_ape58")
+
+[node name="valve_body" type="StaticBody3D" parent="space" groups=["valve"]]
+transform = Transform3D(0.5, -0.866025, 3.78552e-08, 0, -4.37114e-08, -1, 0.866025, 0.5, -2.18557e-08, 8.78345, 8.23304, 0.116116)
+collision_layer = 128
+script = ExtResource("27_u5pcw")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="space/valve_body"]
+shape = SubResource("SphereShape3D_25k4x")
+
+[node name="valve" type="MeshInstance3D" parent="space/valve_body"]
+transform = Transform3D(1, 0, 0, 0, 1, -1.77636e-15, 0, 1.77636e-15, 1, 0, 0, 0)
+mesh = SubResource("TorusMesh_2dx4b")
+skeleton = NodePath("../../base")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="space/valve_body/valve"]
+transform = Transform3D(1, 0, 0, 0, 1, -8.88178e-16, 0, 1.77636e-15, 1, 0, -0.01, 0)
+mesh = SubResource("BoxMesh_4kvvt")
+surface_material_override/0 = ExtResource("15_p0y8v")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="space/valve_body/valve"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, -0.01, 0)
+mesh = SubResource("BoxMesh_4kvvt")
+surface_material_override/0 = ExtResource("15_p0y8v")
+
+[node name="valve_audio" type="AudioStreamPlayer" parent="space/valve_body"]
+stream = ExtResource("18_747k5")
+volume_db = -10.0
+pitch_scale = 0.89
+
+[node name="audio" type="AudioStreamPlayer3D" parent="space/valve_body"]
+transform = Transform3D(0.5, 1.80016e-14, 0.866026, -0.866026, -4.37114e-08, 0.5, 3.78552e-08, -1, -2.18557e-08, 0.00771618, -0.245597, 0.03304)
+stream = ExtResource("14_c3idw")
+volume_db = -20.0
+max_db = -8.0
+pitch_scale = 0.5
+
+[node name="parts" type="CPUParticles3D" parent="space/valve_body"]
+transform = Transform3D(-0.866026, 1.95399e-14, 0.5, -0.5, -4.37114e-08, -0.866026, 2.18557e-08, -1, 3.78552e-08, -0.16549, -0.345596, 0.03304)
+emitting = false
+amount = 20
+mesh = SubResource("QuadMesh_05uo7")
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 12.58
+initial_velocity_max = 12.58
 
 [node name="container_area" type="Area3D" parent="space"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 8, 3)
@@ -1376,9 +1454,14 @@ transform = Transform3D(-0.980416, 0, -0.196939, 0, 1, 0, 0.196939, 0, -0.980416
 [node name="barrel24" parent="space/barrels" instance=ExtResource("21_bkaq4")]
 transform = Transform3D(0.919972, 0, -0.391984, 0, 1, 0, 0.391984, 0, 0.919972, 7.0319, 0.5, -1.26926)
 
-[node name="untitled" parent="space" instance=ExtResource("11_qjivj")]
-transform = Transform3D(-2.40232, 0, 2.01578, 0, 3.136, 0, -2.01578, 0, -2.40232, 1, 1, -7)
-visible = false
+[node name="untitled" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.76497, 0)
+
+[node name="untitled" parent="untitled" instance=ExtResource("31_1dl00")]
+transform = Transform3D(-11.7779, 0, 6.8, 0, 13.6, 0, -6.8, 0, -11.7779, -13, -61.7634, -60)
+
+[node name="Fisher_Boat2" parent="." instance=ExtResource("32_k4qoc")]
+transform = Transform3D(-0.850853, 0.287614, 3.17543, -0.203657, 3.27493, -0.351196, -3.18191, -0.286519, -0.82664, -14, 0.4, -46)
 
 [node name="effect" type="CanvasLayer" parent="."]
 
@@ -1400,20 +1483,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("PlaceholderTexture2D_xi2sj")
-
-[node name="ColorRect" type="ColorRect" parent="effect/Control"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -1.0
-offset_top = -1.0
-offset_right = 1.0
-offset_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
 
 [node name="main_menu" type="Node" parent="."]
 
@@ -1441,8 +1510,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("4_615kh")
 theme_override_font_sizes/font_size = 32
-text = "Project
-Waterbound"
+text = "Waterlocket"
 vertical_alignment = 1
 
 [node name="Button" type="Button" parent="main_menu/ui_layer/control"]
@@ -1455,7 +1523,24 @@ offset_bottom = 195.0
 theme_override_fonts/font = ExtResource("4_615kh")
 text = "Start"
 
+[node name="VSlider" type="VSlider" parent="main_menu/ui_layer/control"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -30.0
+offset_top = 12.0
+offset_right = -14.0
+offset_bottom = -16.0
+grow_horizontal = 0
+grow_vertical = 2
+max_value = 16.0
+step = 0.1
+value = 1.0
+
 [node name="fps" type="Label" parent="."]
+visible = false
 offset_right = 40.0
 offset_bottom = 23.0
 
@@ -1479,7 +1564,67 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
+[node name="name" type="Label" parent="black_layer/black_control"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("4_615kh")
+theme_override_font_sizes/font_size = 32
+text = "created by:
+Matthew"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="game_ui" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="ui" type="Control" parent="game_ui"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="redical" type="ColorRect" parent="game_ui/ui"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1.0
+offset_top = -1.0
+offset_right = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="text" type="Label" parent="game_ui/ui"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("4_615kh")
+text = "Who left this crate out?"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="final_sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("35_yrcs5")
+
 [connection signal="finished" from="space/watersplash_sound" to="." method="_on_watersplash_sound_finished"]
 [connection signal="body_entered" from="space/water_area" to="." method="_on_water_area_body_entered"]
+[connection signal="body_entered" from="space/base/final_des" to="." method="_on_final_des_body_entered"]
 [connection signal="body_entered" from="space/container_area" to="." method="_on_container_area_body_entered"]
 [connection signal="pressed" from="main_menu/ui_layer/control/Button" to="." method="_on_button_pressed"]
+[connection signal="changed" from="main_menu/ui_layer/control/VSlider" to="." method="_on_v_slider_changed"]
+[connection signal="value_changed" from="main_menu/ui_layer/control/VSlider" to="." method="_on_v_slider_value_changed"]

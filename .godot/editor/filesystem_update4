@@ -2,8 +2,7 @@ res://scenes/world.tscn
 res://scenes/concrete_texture.tres
 res://scenes/scafold.tres
 res://scenes/dark_concrete.tres
-res://untitled.tscn
-res://scripts/player.gd
-res://scripts/world.gd
-res://scenes/barrel.tscn
 res://scenes/floor.tres
+res://scenes/dark_red.tres
+res://scenes/fisher_boat.tscn
+res://scenes/untitled.tscn
